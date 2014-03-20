@@ -17,23 +17,23 @@
 
 import gtk
 import gobject
-import gedit
+import pluma
 import options
 import imagelibrary
 
 class ClassBrowser( gtk.VBox ):
-    """ A widget that resides in gedits side panel. """
+    """ A widget that resides in plumas side panel. """
 
-    def __init__(self, geditwindow):
-        """ geditwindow -- an instance of gedit.Window """
+    def __init__(self, plumawindow):
+        """ plumawindow -- an instance of pluma.Window """
         
         imagelibrary.initialise()
 
         gtk.VBox.__init__(self)
-        self.geditwindow = geditwindow
+        self.plumawindow = plumawindow
 
-        try: self.encoding = gedit.encoding_get_current()
-        except: self.encoding = gedit.gedit_encoding_get_current()
+        try: self.encoding = pluma.encoding_get_current()
+        except: self.encoding = pluma.pluma_encoding_get_current()
 
         self.active_timeout = False
 
@@ -172,7 +172,7 @@ class ClassBrowser( gtk.VBox ):
             
 
     def get_current_iter(self):
-       doc = self.geditwindow.get_active_document() 
+       doc = self.plumawindow.get_active_document() 
        iter = None
        path = None
        if doc and self.parser:
@@ -249,7 +249,7 @@ class ClassBrowser( gtk.VBox ):
         if line == 0 or column == 0:
             raise ValueError, "line and column numbers start at 1"
         
-        documents = self.geditwindow.get_documents()
+        documents = self.plumawindow.get_documents()
         found = None
         for d in documents:
             if d.get_uri() == filename:
@@ -258,21 +258,21 @@ class ClassBrowser( gtk.VBox ):
 
         # open an existing tab or create a new one
         if found is not None:
-            tab = gedit.tab_get_from_document(found)
-            self.geditwindow.set_active_tab(tab)
+            tab = pluma.tab_get_from_document(found)
+            self.plumawindow.set_active_tab(tab)
             doc = tab.get_document()
             doc.begin_user_action()
             it = doc.get_iter_at_line_offset(line-1,column-1)
             doc.place_cursor(it)
             (start, end) = doc.get_bounds()
-            self.geditwindow.get_active_view().scroll_to_iter(end,0.0)
-            self.geditwindow.get_active_view().scroll_to_iter(it,0.0)
-            self.geditwindow.get_active_view().grab_focus()
+            self.plumawindow.get_active_view().scroll_to_iter(end,0.0)
+            self.plumawindow.get_active_view().scroll_to_iter(it,0.0)
+            self.plumawindow.get_active_view().grab_focus()
             doc.end_user_action()
         else:
-            tab = self.geditwindow.create_tab_from_uri(filename,self.encoding,line,False,False)
-            self.geditwindow.set_active_tab(tab)
-            found = self.geditwindow.get_active_document()
+            tab = self.plumawindow.create_tab_from_uri(filename,self.encoding,line,False,False)
+            self.plumawindow.set_active_tab(tab)
+            found = self.plumawindow.get_active_document()
 
         # place mark
         #it = found.get_iter_at_line(line-1)
@@ -296,7 +296,7 @@ class ClassBrowser( gtk.VBox ):
             self.active_timeout = True
 
     def update_cursor(self, *args):
-        doc = self.geditwindow.get_active_document()
+        doc = self.plumawindow.get_active_document()
         if doc and self.parser:
             it = doc.get_iter_at_mark(doc.get_insert())
             line = it.get_line()

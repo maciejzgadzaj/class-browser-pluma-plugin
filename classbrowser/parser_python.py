@@ -262,8 +262,8 @@ class PythonParser( ClassParserInterface ):
     and http://ctags.sourceforge.net/FORMAT for a description of the file format.
     """
     
-    def __init__(self, geditwindow):
-        self.geditwindow = geditwindow
+    def __init__(self, plumawindow):
+        self.plumawindow = plumawindow
         self.pythonfile = None
 
 
@@ -299,7 +299,7 @@ class PythonParser( ClassParserInterface ):
     
         try: tok = model.get_value( model.get_iter(path), 0 )
         except: tok = None
-        pt = self.geditwindow.get_data("PythonToolsPlugin")
+        pt = self.plumawindow.get_data("PythonToolsPlugin")
         tagposition = self.get_tag_position(model,path)
         
         if pt and tok and tagposition:

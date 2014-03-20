@@ -35,13 +35,13 @@ class Token:
 
 class DiffParser(ClassParserInterface):
 
-  def parse(self, geditdoc):
-    text = geditdoc.get_text(*geditdoc.get_bounds())
+  def parse(self, plumadoc):
+    text = plumadoc.get_text(*plumadoc.get_bounds())
     linecount = -1
     current_file = None
     changeset = None
     files = []
-    uri = geditdoc.get_uri()
+    uri = plumadoc.get_uri()
     
     for line in text.splitlines():
       linecount += 1
@@ -185,13 +185,13 @@ class Token:
 
 class DiffParser(ClassParserInterface):
 
-  def parse(self, geditdoc):
-    text = geditdoc.get_text(*geditdoc.get_bounds())
+  def parse(self, plumadoc):
+    text = plumadoc.get_text(*plumadoc.get_bounds())
     linecount = -1
     current_file = None
     changeset = None
     files = []
-    uri = geditdoc.get_uri()
+    uri = plumadoc.get_uri()
     
     for line in text.splitlines():
       linecount += 1

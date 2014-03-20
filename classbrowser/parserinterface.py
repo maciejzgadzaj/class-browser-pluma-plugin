@@ -19,7 +19,7 @@
 class ClassParserInterface:
     """ An abstract interface for class parsers.
     
-    A class parser monitors gedit documents and provides a gtk.TreeModel
+    A class parser monitors pluma documents and provides a gtk.TreeModel
     that contains the browser tree. Elements in the browser tree are reffered
     to as 'tags'.
     
@@ -33,10 +33,10 @@ class ClassParserInterface:
     
     #------------------------------------- methods that *have* to be implemented
     
-    def parse(self, geditdoc): 
-        """ Parse a gedit.Document and return a gtk.TreeModel. 
+    def parse(self, plumadoc): 
+        """ Parse a pluma.Document and return a gtk.TreeModel. 
         
-        geditdoc -- a gedit.Document
+        plumadoc -- a pluma.Document
         """
         pass        
         
@@ -84,7 +84,7 @@ class ClassParserInterface:
         Can be used to monitor changes in the document.
         
         model -- a gtk.TreeModel (previously provided by parse())
-        doc -- a gedit document
+        doc -- a pluma document
         line -- int
         """
         pass
@@ -95,7 +95,7 @@ class ClassParserInterface:
         tag can't be found.
         
         model -- a gtk.TreeModel (previously provided by parse())
-        doc -- a gedit document
+        doc -- a pluma document
         linenumber -- int
         """
         pass

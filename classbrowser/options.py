@@ -35,7 +35,7 @@ class Options(gobject.GObject):
     def __init__(self):
 
         gobject.GObject.__init__(self)
-        self.__gconfDir = "/apps/gedit-2/plugins/classbrowser"
+        self.__gconfDir = "/apps/pluma-2/plugins/classbrowser"
 
         # default values
         self.verbose = False

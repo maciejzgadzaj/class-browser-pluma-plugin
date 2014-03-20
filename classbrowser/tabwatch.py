@@ -20,15 +20,15 @@ import options
 
 #-------------------------------------------------------------------------------        
 class TabWatch:
-    """ Monitor the tabs in gedit to find out when documents get opened or
+    """ Monitor the tabs in pluma to find out when documents get opened or
         changed. """
 
     def __init__(self, window, classbrowser):
         self.browser = classbrowser   
-        self.geditwindow = window
-        self.geditwindow.connect("tab_added",self.__tab_added_or_activated)
-        self.geditwindow.connect("tab_removed",self.__tab_removed)
-        self.geditwindow.connect("active_tab_changed",self.__tab_added_or_activated)
+        self.plumawindow = window
+        self.plumawindow.connect("tab_added",self.__tab_added_or_activated)
+        self.plumawindow.connect("tab_removed",self.__tab_removed)
+        self.plumawindow.connect("active_tab_changed",self.__tab_added_or_activated)
         
         self.openfiles = []
         self.currentDoc = None
@@ -43,13 +43,13 @@ class TabWatch:
     
     def __tab_added_or_activated(self, window, tab):
         self.__register(tab.get_document(),tab)
-        doc = self.geditwindow.get_active_document()
+        doc = self.plumawindow.get_active_document()
         if doc != self.currentDoc: self.__update()
 
     def __tab_removed(self, window, tab):
         self.__unregister(tab.get_document())
 
-        doc = self.geditwindow.get_active_document()
+        doc = self.plumawindow.get_active_document()
         if doc != self.currentDoc: self.__update()
 
     def __register(self, doc, tab):
@@ -72,7 +72,7 @@ class TabWatch:
         #if options.singleton().verbose: print "removed:",uri
 
     def __update(self, *args):
-        doc = self.geditwindow.get_active_document()
+        doc = self.plumawindow.get_active_document()
         if doc:
                 
             lang = doc.get_language()

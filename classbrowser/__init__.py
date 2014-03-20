@@ -15,7 +15,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, 
 # Boston, MA 02111-1307, USA.
 
-import gedit
+import pluma
 import gtk
 from browserwidget import ClassBrowser
 from tabwatch import TabWatch
@@ -23,7 +23,7 @@ import options
 from parser_ctags import CTagsParser
 from parser_python import PythonParser
 from parser_ruby import RubyParser
-from parser_html import geditHTMLParser
+from parser_html import plumaHTMLParser
 from parser_diff import DiffParser
 from parser_etags import ETagsParser, ETagsParserPHP
 
@@ -49,10 +49,10 @@ icon = [
 "                "]
        
 #-------------------------------------------------------------------------------
-class ClassBrowserPlugin(gedit.Plugin):
+class ClassBrowserPlugin(pluma.Plugin):
 
     def __init__(self):
-        gedit.Plugin.__init__(self)
+        pluma.Plugin.__init__(self)
         
 
     def create_configure_dialog(self):
@@ -71,7 +71,7 @@ class ClassBrowserPlugin(gedit.Plugin):
         self.tabwatch.register_parser("Diff",DiffParser())
         self.tabwatch.register_parser("PHP",ETagsParserPHP())
 
-        htmlParser = geditHTMLParser()
+        htmlParser = plumaHTMLParser()
         self.tabwatch.register_parser("HTML",htmlParser)
         self.tabwatch.register_parser("XML",htmlParser)
 
@@ -87,7 +87,7 @@ class ClassBrowserPlugin(gedit.Plugin):
         self.classbrowser = ClassBrowser(window)
         panel.add_item(self.classbrowser, "Class Browser", image)
 
-        # create the tabwatch to monitor open files in gedit
+        # create the tabwatch to monitor open files in pluma
         self.tabwatch = TabWatch(window, self.classbrowser)
 
         # store per window data in the window object
@@ -108,7 +108,7 @@ class ClassBrowserPlugin(gedit.Plugin):
             """
             
         manager = window.get_ui_manager()
-        windowdata["action_group"] = gtk.ActionGroup("GeditClassBrowserPluginActions")
+        windowdata["action_group"] = gtk.ActionGroup("PlumaClassBrowserPluginActions")
         windowdata["action_group"].add_actions(
          [
             # name, stock id, label, accelerator, tooltip

@@ -40,7 +40,7 @@ class customParser(HTMLParser):
 
 #=================================================================================================
 
-class geditHTMLParser( ClassParserInterface ):
+class plumaHTMLParser( ClassParserInterface ):
 
 
     def parse(self, d): 
@@ -95,7 +95,7 @@ class geditHTMLParser( ClassParserInterface ):
         Can be used to monitor changes in the document.
         
         model -- a gtk.TreeModel (previously provided by parse())
-        doc -- a gedit document
+        doc -- a pluma document
         line -- int
         """
         pass
@@ -106,7 +106,7 @@ class geditHTMLParser( ClassParserInterface ):
         tag can't be found.
         
         model -- a gtk.TreeModel (previously provided by parse())
-        doc -- a gedit document
+        doc -- a pluma document
         linenumber -- int
         """
         
